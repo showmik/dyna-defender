@@ -19,10 +19,16 @@ public class CannonController : MonoBehaviour
 
     private void Update()
     {
+        fireTimeCounter -= Time.deltaTime;
         TakeInput();
         RotateCannon();
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            hasFired = true;
+        }
+
         FireProjectile();
-        fireTimeCounter -= Time.deltaTime;
     }
 
     private void TakeInput()
@@ -34,7 +40,6 @@ public class CannonController : MonoBehaviour
 
             if (touchCordinate.y > transform.position.y)
             {
-                hasFired = true;
                 Vector2 targetVector = touchCordinate - transform.position;
                 targetRotation = Quaternion.FromToRotation(-transform.position, targetVector);
             }
